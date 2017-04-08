@@ -1,8 +1,11 @@
 package controllers;
 
-import play.mvc.*;
+import com.google.inject.Inject;
+import models.Person;
+import play.mvc.Controller;
+import play.mvc.Result;
+import repositories.PersonRepository;
 
-import views.html.*;
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -10,14 +13,15 @@ import views.html.*;
  */
 public class HomeController extends Controller {
 
-    /**
-     * An action that renders an HTML page with a welcome message.
-     * The configuration in the <code>routes</code> file means that
-     * this method will be called when the application receives a
-     * <code>GET</code> request with a path of <code>/</code>.
-     */
+    @Inject
+    private PersonRepository personRepository;
+
     public Result index() {
-        return ok(index.render("Your new application is ready."));
+        Person person = new Person();
+        person.setName("John Doe");
+        person.setAge(25);
+        personRepository.save(person);
+        return ok();
     }
 
 }

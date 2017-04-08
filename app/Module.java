@@ -1,9 +1,6 @@
 import com.google.inject.AbstractModule;
-import java.time.Clock;
-
-import services.ApplicationTimer;
-import services.AtomicCounter;
-import services.Counter;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 /**
  * This class is a Guice module that tells Guice how to bind several
@@ -15,17 +12,13 @@ import services.Counter;
  * adding `play.modules.enabled` settings to the `application.conf`
  * configuration file.
  */
+@Configuration
+@EnableMongoRepositories("repositories")
 public class Module extends AbstractModule {
 
     @Override
     public void configure() {
-        // Use the system clock as the default implementation of Clock
-        bind(Clock.class).toInstance(Clock.systemDefaultZone());
-        // Ask Guice to create an instance of ApplicationTimer when the
-        // application starts.
-        bind(ApplicationTimer.class).asEagerSingleton();
-        // Set AtomicCounter as the implementation for Counter.
-        bind(Counter.class).to(AtomicCounter.class);
+
     }
 
 }
