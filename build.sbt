@@ -7,7 +7,7 @@ version := "1.0-SNAPSHOT"
 lazy val root = (project in file(".")).enablePlugins(PlayJava, JavaAppPackaging, DockerPlugin)
 
 val cryptoSecret = Option(System.getProperty("cryptosecret")).getOrElse("571a034e-3182-11e7-93ae-92361f002671")
-val configFile = Option(System.getProperty("env")).getOrElse("dev")
+val configFile = Option(System.getProperty("env")).getOrElse("application")
 
 scalaVersion := "2.11.8"
 
